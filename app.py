@@ -15,6 +15,14 @@ def index():
     content = Markup(markdown.markdown(content))
     return render_template('index.html', **locals())
 
+@app.route("/m9downloadtool/")
+def m9downloadtool():
+    content = ""
+    with open('m9downloadtool.md', 'r') as f:
+        content = f.read()
+    content = Markup(markdown.markdown(content))
+    return render_template('m9downloadtool.html', **locals())
+
 @app.route("/service1/")
 def service1():
     content = ""
@@ -39,6 +47,14 @@ def service3():
     content = Markup(markdown.markdown(content))
     return render_template('service3.html', **locals())
 
+@app.route("/service4/")
+def service4():
+    content = ""
+    with open('service4.md', 'r') as f:
+        content = f.read()
+    content = Markup(markdown.markdown(content))
+    return render_template('service4.html', **locals())
+
 # Getting Motions For a Particular LatLon
 @app.route('/getMotionFromLatLon', methods=['GET'])
 def getMotionFromLatLon():
@@ -48,6 +64,7 @@ def getMotionFromLatLon():
     Unprocessed = bool(request.args.get('Unprocessed'))
     GetDistanceToRupture = bool(request.args.get('GetDistanceToRupture'))
     ResponseSpectra = bool(request.args.get('ResponseSpectra'))
+    SensitivityRuns = bool(request.args.get('SensitivityRuns'))
 
     import ProcessM9Motion
     # Find Closest Site Code
@@ -56,9 +73,11 @@ def getMotionFromLatLon():
     # Get Motion
     import json
     Motions = ProcessM9Motion.GetM9Motion(StationName,
-                                       Unprocessed=Unprocessed,
-                                       GetDistanceToRupture=GetDistanceToRupture,
-                                       ResponseSpectra=ResponseSpectra, DistanceToClosestSite=DistanceToClosestSite)
+                                          Unprocessed=Unprocessed,
+                                          GetDistanceToRupture=GetDistanceToRupture,
+                                          ResponseSpectra=ResponseSpectra,
+                                          DistanceToClosestSite=DistanceToClosestSite,
+                                          SensitivityRuns=SensitivityRuns)
     return json.dumps(Motions)
 
 # Getting Motions For a Particular LatLon
@@ -67,6 +86,7 @@ def getMotionInCSVFromLatLon():
     # bar = request.args.to_dict()
     Latitude = request.args.get('Latitude')
     Longitude = request.args.get('Longitude')
+    SensitivityRuns = bool(request.args.get('SensitivityRuns'))
 
     import ProcessM9Motion
     # Find Closest Site Code
@@ -74,7 +94,8 @@ def getMotionInCSVFromLatLon():
 
     # Get Motion
     Motions = ProcessM9Motion.GetM9Motion(StationName,
-                                          DistanceToClosestSite=DistanceToClosestSite)
+                                          DistanceToClosestSite=DistanceToClosestSite,
+                                          SensitivityRuns=SensitivityRuns)
 
     Line1 = ''
     Line2 = 'Time (s)'
@@ -105,6 +126,7 @@ def getMotionInCSVFromLatLon():
 def getMotionInCSVFromStationName():
     # bar = request.args.to_dict()
     StationName = request.args.get('StationName')
+    SensitivityRuns = bool(request.args.get('SensitivityRuns'))
 
     import ProcessM9Motion
     Latitude, Longitude = ProcessM9Motion.FindLatLonOfStation(StationName)
@@ -114,7 +136,8 @@ def getMotionInCSVFromStationName():
 
     # Get Motion
     Motions = ProcessM9Motion.GetM9Motion(StationName,
-                                          DistanceToClosestSite=DistanceToClosestSite)
+                                          DistanceToClosestSite=DistanceToClosestSite,
+                                          SensitivityRuns=SensitivityRuns)
 
     Line1 = ''
     Line2 = 'Time (s)'
@@ -147,13 +170,15 @@ def getMotionFromStationName():
     Unprocessed = bool(request.args.get('Unprocessed'))
     GetDistanceToRupture = bool(request.args.get('GetDistanceToRupture'))
     ResponseSpectra = bool(request.args.get('ResponseSpectra'))
+    SensitivityRuns = bool(request.args.get('SensitivityRuns'))
 
     import ProcessM9Motion
     import json
     Motions = ProcessM9Motion.GetM9Motion(StationName,
-                                       Unprocessed=Unprocessed,
-                                       GetDistanceToRupture=GetDistanceToRupture,
-                                       ResponseSpectra=ResponseSpectra)
+                                          Unprocessed=Unprocessed,
+                                          GetDistanceToRupture=GetDistanceToRupture,
+                                          ResponseSpectra=ResponseSpectra,
+                                          SensitivityRuns=SensitivityRuns)
     return json.dumps(Motions)
 
 def GetJson(Motions):

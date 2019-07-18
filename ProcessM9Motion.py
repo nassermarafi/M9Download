@@ -1,6 +1,37 @@
 RealizationsToProcess = ['csz%03d'%x for x in range(1,34,1)] + ['csz002_sd10']
 RealizationsIgnore = ['csz001', 'csz015', 'csz016', 'csz002']
-RealizationsToProcess = [x for x in RealizationsToProcess if not(x in RealizationsIgnore)]
+LogicTreeRealizations = [x for x in RealizationsToProcess if not(x in RealizationsIgnore)]
+
+SensitivityRealizations = \
+    [
+                    'csz002',
+                    'csz002_sd10',  # 33
+                    'csz002_sd10_100bar',  # 33
+                    'csz002_sd10_300bar',  # 33
+                    'csz005_south',  # 35
+                    'csz005_trench',  # 36
+                    'csz005_zero',  # 45
+                    'csz002_sd10_revPwave',  # 48
+                    '032017',
+                    '032217',
+                    '032817', #Run again
+                    '040617',
+                    '042417',
+                    '042817',
+                    '050117',
+                    '051117',
+                    '051817',
+                    '060317',
+                    '061417',
+                    '062217',
+                    '050117'
+                    '051117',
+                    '051817',
+                    '081117',
+                    '081817',
+                    '081917',
+                    '100617',
+    ]
 
 def FindClosestStationNameToLatLon(Latitude, Longitude):
     import numpy as np
@@ -21,10 +52,16 @@ def FindLatLonOfStation(StationName):
             return latlon[i][1], latlon[i][2]
     return None
 
-def GetM9Motion(StationName, Unprocessed = False, GetDistanceToRupture = False, ResponseSpectra = False, DistanceToClosestSite = None):
+def GetM9Motion(StationName, Unprocessed = False, GetDistanceToRupture = False, ResponseSpectra = False,
+                DistanceToClosestSite = None, SensitivityRuns = False):
     import numpy as np
     Motions = []
     SigFigures = 5
+
+    if not SensitivityRuns:
+        RealizationsToProcess = LogicTreeRealizations
+    else:
+        RealizationsToProcess = SensitivityRealizations
 
     for realization in RealizationsToProcess[:]:
         print('Processing Realization %s'%realization)

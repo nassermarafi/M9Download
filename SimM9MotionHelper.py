@@ -10,47 +10,20 @@ SlipFilePath = ''#os.getcwd()+'/Broadbands/RawData/%s/%s'%(Realization, SourceFi
 
 ############################################# Methods #################################################################
 
-LogicTreeRealizations = [
-                    'csz001',  # 30
-                    'csz002',  # 31
-                    'csz003',  # 32
-                    'csz004',  # 37
-                    'csz005',  # 34
-                    'csz006',  # 38
-                    'csz007',  # 39
-                    'csz008',  # 40
-                    'csz009',  # 41
-                    'csz010',  # 42
-                    'csz011',  # 43
-                    'csz012',  # 44
-                    'csz013',  # 46
-                    'csz014',  # 47
-                    'csz015',  # 49
-                    'csz016',  # 50
-                    'csz017',  # 51
-                    'csz018',  # 52
-                    'csz019',  # 53
-                    'csz020',  # 54
-                    'csz021',  # 57
-                    'csz022',  # 58
-                    'csz023',  # 59
-                    'csz024',  # 60 # Rerun
-                    'csz025',  # 61
-                    'csz026',  # 62
-                    'csz027',  # 63
-                    'csz028',  # 64
-                    'csz029',  # 65
-                    'csz030',  # 66
-                    ]
+RealizationsToProcess = ['csz%03d'%x for x in range(1,34,1)] + ['csz002_sd10']
+RealizationsIgnore = ['csz001', 'csz015', 'csz016', 'csz002']
+LogicTreeRealizations = [x for x in RealizationsToProcess if not(x in RealizationsIgnore)]
 
-SensitivityRealizations = [
+SensitivityRealizations = \
+    [
+                    'csz002',
                     'csz002_sd10',  # 33
                     'csz002_sd10_100bar',  # 33
                     'csz002_sd10_300bar',  # 33
                     'csz005_south',  # 35
                     'csz005_trench',  # 36
                     'csz005_zero',  # 45
-                    # 'csz002_sd10_revPwave',  # 48
+                    'csz002_sd10_revPwave',  # 48
                     '032017',
                     '032217',
                     '032817', #Run again
@@ -63,14 +36,14 @@ SensitivityRealizations = [
                     '060317',
                     '061417',
                     '062217',
+                    '050117'
                     '051117',
                     '051817',
                     '081117',
                     '081817',
                     '081917',
                     '100617',
-                    '082517',
-]
+    ]
 
 def GetPath(Realization, Map='A'):
     global path, BroadbandLocation, SlipFilePath
