@@ -22,12 +22,9 @@ Neither the University of Washington, nor the USGS, nor the National Science Fou
 
 ### Requested Parameters
 _Required Parameters:_
-
-#### Latitude
-Specify the latitude of the site location. Example: ```47.6```
-
-#### Longitude
-Specify the longitude of the site location. Example: ```-122.3```
+ 
+#### StationName
+Specify the Station Name. Example: ```A11923```
 
 #### SensitivityRuns
 Download the sensitivity runs from Wirth et al. 2018 instead of the Frankel et al. 2018 (logic tree runs). Example: ```True``` or ```False```
@@ -39,7 +36,7 @@ The csv file is comma delimited. The first column corresponds to the time (in se
 ### Example 
 #### Request
 ```
-https://m9-broadband-download-rwqks6gbba-uc.a.run.app/getMotionInCSVFromLatLon?Latitude=47.6062&Longitude=-122.3321
+https://m9-broadband-download-rwqks6gbba-uc.a.run.app/getMotionInCSVFromStationName?StationName=A11923
 ```
 
 To download CSV with acceleration history for a particular location:
