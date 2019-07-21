@@ -117,7 +117,6 @@ target/
 
 # Ignore all the files that would be made if you run OpenSees
 *.tcl
-*.dat
 
 # Ignore all of pycharms idea-intellij files
 .idea
