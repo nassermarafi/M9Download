@@ -1246,8 +1246,7 @@ def GetResponseSpectra(GMData, Dt, Zeta, Tmax=20):
         T[i] = accuracy + i * accuracy
         uElastic[i], vElastic[i], aElastic[i] = FindSa(GMData * g, Dt, T[i], Zeta)
 
-    return aElastic, T
-
+    return aElastic / g, T
 
 def ReadResponseSpectrumFile(File_Location, File_Name):
     f = open(File_Location+'//'+File_Name)
