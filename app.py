@@ -129,14 +129,8 @@ def getMotionInCSVFromStationName():
     SensitivityRuns = bool(request.args.get('SensitivityRuns'))
 
     import ProcessM9Motion
-    Latitude, Longitude = ProcessM9Motion.FindLatLonOfStation(StationName)
-
-    # Find Closest Site Code
-    StationName, DistanceToClosestSite = ProcessM9Motion.FindClosestStationNameToLatLon(Latitude, Longitude)
-
     # Get Motion
     Motions = ProcessM9Motion.GetM9Motion(StationName,
-                                          DistanceToClosestSite=DistanceToClosestSite,
                                           SensitivityRuns=SensitivityRuns)
 
     Line1 = ''
