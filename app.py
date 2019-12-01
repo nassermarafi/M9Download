@@ -142,7 +142,7 @@ def getMotionInCSVFromStationName():
                                                       Motions[i]['Realization'],
                                                       Motions[i]['Realization'])
         if i == 0:
-            Line1 += '# Station Code: %s'%Motions[i]['StationCode'] + ', DistanceToClosestSite: %.5f' % Motions[i]['DistanceToClosestSite']
+            Line1 += '# Station Code: %s'%Motions[i]['StationCode']
             TimeHistory.append(np.arange(0,len(Motions[i]['AccelerationHistory-EW']),1)*Motions[i]['TimeStep'])
             TimeHistory.append(Motions[i]['AccelerationHistory-EW'])
             TimeHistory.append(Motions[i]['AccelerationHistory-NS'])
